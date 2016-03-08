@@ -8,11 +8,45 @@
 
 import UIKit
 
+extension CGFloat {
+    static func random() -> CGFloat {
+        return CGFloat(arc4random()) / CGFloat(UInt32.max)
+    }
+}
+
+extension UIColor {
+    static func randomColor() -> UIColor {
+        let r = CGFloat.random()
+        let g = CGFloat.random()
+        let b = CGFloat.random()
+        
+        return UIColor(red: r, green: g, blue: b, alpha: 0.7)
+    }
+}
+
 class ConversionViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBOutlet var celciusLabel: UILabel!
     @IBOutlet var textField: UITextField!
+    
+    override func viewDidLoad() {
+        // always call the super implementation of viewDidLoad
+        super.viewDidLoad()
+        
+        print("ConversionViewController loaded its view.")
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        changeBackgroundColor()
+    }
+    
+    func changeBackgroundColor() {
+        
+        self.view.backgroundColor = UIColor.randomColor()
+        
+    }
     
     var fahrenheitValue: Double? {
         didSet {
@@ -73,22 +107,6 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
             else {
                 return true
             }
-            
-// attempt at bronze challenge in chapter 4
-            
-//        let existingText:NSString = textField.text!
-//            
-//        let validValues = NSCharacterSet(charactersInString: "0123456789.")
-//        let invalidValues = validValues.invertedSet
-//        let rangeOfInvalidValues = existingText.rangeOfCharacterFromSet(invalidValues)
-//        let invalidEntry:Bool = rangeOfInvalidValues.location != NSNotFound
-//            
-//        if invalidEntry {
-//            return false
-//        }
-//        else {
-//            return true
-//        }
         
     }
     
